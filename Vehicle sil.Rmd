@@ -1,0 +1,96 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+##Goal of collecting this dataset
+The goal of collecting this dataset is to determine the category of a given vehicle silhouette among three types (car, van, bus) by utilizing a set of extracted silhouette-based features.
+
+##Classification
+The classification of vehicle silhouettes involves the utilization of a set of distinctive attributes extracted from these silhouettes. The primary objective is to categorize these silhouettes into one of three predefined classes: cars, vans, or buses.
+
+##Defect prediction
+Defect prediction in a dataset of vehicle silhouettes involves spotting potential issues or irregularities within these silhouette images. This process may encompass the detection of inconsistencies or abnormalities in the silhouettes, including the presence of missing data points, which can be problematic. Leveraging data mining techniques, defect prediction enhances the dataset's overall quality and dependability, ensuring it faithfully reflects the desired information. This, in turn, reduces the risk of producing inaccurate or deceptive outcomes when the dataset is applied in subsequent tasks and applications, such as object recognition and classification.
+
+##Link Of dataset:
+https://www.kaggle.com/datasets/pritech/vehicle-silhouettes/data
+
+##Number of attribute
+19
+##Number of objects
+847
+```{r}
+
+##read file named "vehicle.csv" and save it in dataframe named "dataset"
+dataset=read.csv("vehicle.csv")
+str(dataset)
+
+```
+
+
+
+
+
+##Statistical measurements
+```{r}
+"the following code Gives us the min, max, mean , median , the 1st and 3ed quarter."
+
+summary(dataset$pr.axis_aspect_ratio)
+summary(dataset$compactness)
+summary(dataset$circularity)
+summary(dataset$scaled_variance)
+summary(dataset$max.length_aspect_ratio)
+summary(dataset$skewness_about)
+summary(dataset$hollows_ratio)
+
+
+install.packages("dplyr")
+library(dplyr)
+
+install.packages("outliers")
+library(outliers)
+
+
+boxplot( pr.axis_aspect_ratio ~ class, data = dataset)
+"there is outlier"
+
+boxplot( compactness ~ class, data = dataset)
+"there is no outlier"
+
+boxplot( circularity ~ class, data = dataset)
+"there is outlier"
+
+boxplot( scaled_variance ~ class, data = dataset)
+"there is outlier"
+
+boxplot( max.length_aspect_ratio ~ class, data = dataset)
+"there is outlier"
+
+boxplot( skewness_about ~ class, data = dataset)
+"there is outlier"
+
+boxplot( hollows_ratio ~ class, data = dataset)
+"there is outlier"
+
+
+cov(dataset$compactness, dataset$hollows_ratio) 
+cor(dataset$compactness, dataset$hollows_ratio) 
+
+cov(dataset$max.length_aspect_ratio, dataset$hollows_ratio) 
+cor(dataset$max.length_aspect_ratio, dataset$hollows_ratio)
+
+
+
+with(dataset, plot(compactness, hollows_ratio, pch = as.numeric(class)))
+
+
+
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
