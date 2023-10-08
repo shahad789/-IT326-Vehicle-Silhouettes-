@@ -1,7 +1,10 @@
 ## missing value
 
 ```{r}
-dataset= na.omit(dataset)
+
+         
+dataset$circularity[is.na(dataset$circularity)]<- (median(dataset$circularity, na.rm =TRUE))
+
 ```
 
 We analyzed the database to identify missing values using the provided code, and we found missing values that we have deleted. As a result, the number of rows decreased from 846 to 816.
@@ -20,6 +23,9 @@ Upper <- quartiles[2] + 1.5*IQR
 
 data_no_outlier <- subset(dataset, dataset$radius_ratio > Lower & dataset$radius_ratio < Upper)
 dim(data_no_outlier)
+
+
+
 ```
 
 pr.axis_aspect_ratio outliers 8
@@ -32,8 +38,11 @@ Lower <- quartiles[1] - 1.5*IQR
 Upper <- quartiles[2] + 1.5*IQR 
 
 
-data_no_outlier <- subset(dataset, dataset$pr.axis_aspect_ratio > Lower & dataset$pr.axis_aspect_ratio < Upper)
-dim(data_no_outlier)
+dataset <- subset(dataset, dataset$pr.axis_aspect_ratio > Lower & dataset$pr.axis_aspect_ratio < Upper)
+dim(dataset)
+
+
+
 ```
 
 max.length_aspect_ratio outliers is 5
@@ -48,7 +57,9 @@ Upper <- quartiles[2] + 1.5*IQR
 
 data_no_outlier <- subset(dataset, dataset$max.length_aspect_ratio > Lower & dataset$max.length_aspect_ratio < Upper)
 dim(data_no_outlier)
-    
+
+boxplot(dataset$pr.axis_aspect_ratio)
+   
 
 ```
 
@@ -84,7 +95,7 @@ scaled_radius_of_gyration.1 is outliers is 10
 
 ```{r}
 quartiles <- quantile(dataset$scaled_radius_of_gyration.1, probs=c(.25, .75), na.rm = FALSE)
-IQR <- IQR(dataset$scaled_variance.1)
+IQR <- IQR(dataset$scaled_radius_of_gyration.1)
 
 Lower <- quartiles[1] - 1.5*IQR
 Upper <- quartiles[2] + 1.5*IQR 
@@ -122,4 +133,6 @@ Upper <- quartiles[2] + 1.5*IQR
 data_no_outlier <- subset(dataset, dataset$skewness_about.1 > Lower & dataset$skewness_about.1 < Upper)
 dim(data_no_outlier)
     
+boxplot(dataset$skewness_about.1)
+
 ```
