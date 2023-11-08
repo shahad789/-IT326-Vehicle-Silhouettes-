@@ -166,7 +166,8 @@ dataset <- downSample(x = dataset[, -which(names(dataset) == "class")], y =datas
 
 
 ############################################################################
-# Fit A Classification Tree:
+
+
 
 # Set a fixed random seed for reproducibility
 set.seed(234)
@@ -189,7 +190,7 @@ class.test <- dataset$class[-train_indices]
 fit.tree <- rpart(Class ~ ., data = Vehicle.train, method = "class", cp = 0.008)
 
 
-# Print the fitted tree
+# Print the fitted tree(flag)
 fit.tree
 
 
@@ -237,3 +238,8 @@ confusion_matrix <- table(pred.prune, Vehicle.test$Class)
 
 # Print or inspect the confusion matrix
 print(confusion_matrix)
+
+#performance metrics
+library(caret)
+confusion_matrix_result <- confusionMatrix(pred.prune, Vehicle.test$Class)
+confusion_matrix_result
