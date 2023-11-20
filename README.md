@@ -8,5 +8,5 @@
 <li>Shahad Alhaddad</li>
 <li>Wejoud Alkhashlan</li>
 <li>Lina Albarrak</li>
-<li>Shahad Alhaddad</li>
+
 </ul>
